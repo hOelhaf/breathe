@@ -1228,14 +1228,8 @@ class SphinxRenderer:
             else:
                 rst_node = addnodes.desc()
 
-                # Build targets for linking
-                targets = []
-                targets.extend(doxygen_target)
-
-                title_signode = addnodes.desc_signature()
-                title_signode.extend(targets)
-
                 # Set up the title
+                title_signode = addnodes.desc_signature()
                 title_signode.append(nodes.emphasis(text=kind))
                 title_signode.append(nodes.Text(" "))
                 title_signode.append(addnodes.desc_name(text=name))
@@ -1247,6 +1241,12 @@ class SphinxRenderer:
             rst_node["domain"] = self.get_domain() if self.get_domain() else "cpp"
 
             contentnode = addnodes.desc_content()
+            
+            # Build targets for linking
+            targets = []
+            targets.extend(doxygen_target)
+            contentnode.extend(targets)
+
             rst_node.append(contentnode)
 
             return [rst_node], contentnode
