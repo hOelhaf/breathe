@@ -59,7 +59,7 @@ class _DoxygenContentBlockDirective(BaseDirective):
             warning = self.create_warning(project_info, name=name, kind=self.kind)
             return warning.warn('doxygen{kind}: Cannot find {kind} "{name}" {tail}')
 
-        if "content-only" in self.options and self.kind != "page":
+        if "content-only" in self.options and self.kind != "page" and self.kind != "group":
             # Unpack the single entry in the matches list
             (node_stack,) = matches
 
